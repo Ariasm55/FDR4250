@@ -1,10 +1,14 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Upload Report for {{ rotary_year.year }}</h1>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
-  </form>
+  <h1>Upload Club Report for {{ rotary_year.year }}</h1>
+  {% if not rotary_year.is_closed or user.is_superuser %}
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="button">Upload</button>
+    </form>
+  {% else %}
+    <p>Uploading is not allowed as the Rotary Year is closed.</p>
+  {% endif %}
 {% endblock %}

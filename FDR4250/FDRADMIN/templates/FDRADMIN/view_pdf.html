@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>View PDF</h1>
+  <div class="pdf-container">
+    <iframe src="{% url 'file-serve' file.id %}" class="pdf-viewer"></iframe>
+  </div>
+  <div class="pdf-actions">
+    {% if user.is_superuser %}
+      <form method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" name="authorize" class="button">Authorize</button>
+        <button type="submit" name="decline" class="button">Decline</button>
+      </form>
+    {% endif %}
+    <a href="{% url 'file-download' file.id %}" class="button">Download PDF</a>
+  </div>
+{% endblock %}

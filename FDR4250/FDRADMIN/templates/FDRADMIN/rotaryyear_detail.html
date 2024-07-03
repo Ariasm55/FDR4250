@@ -1,24 +1,54 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>{{ object.year }}</h1>
-  <p>Full Year: {{ object.rotary_full_year }}</p>
-  <p>Notice: {{ object.notice }}</p>
-  <p>Closed: {{ object.is_closed }}</p>
+  <h1>{{ rotary_year.year }} Details</h1>
+  <p><strong>Full Year:</strong> {{ rotary_year.rotary_full_year }}</p>
+  <p><strong>Notice:</strong> {{ rotary_year.notice }}</p>
+  <p><strong>Closed:</strong> {{ rotary_year.is_closed }}</p>
 
-  <h2>Files</h2>
+  <h2>Superadmin Files</h2>
   <ul>
     {% for file in files %}
-      <li>{{ file.file.name }}</li>
+      <li><a href="{% url 'file-view' file.id %}">{{ file.file.name }}</a></li>
     {% endfor %}
   </ul>
 
-  <h2>Reports</h2>
+  {% if user.is_superuser %}
+    <h2>Upload New File</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="button">Upload</button>
+    </form>
+  {% endif %}
+
+  <h2>Club Reports</h2>
   <ul>
     {% for report in reports %}
-      <li>{{ report.report_file.name }}</li>
+      <li>
+        <a href="{% url 'file-view' report.id %}">{{ report.file.name }}</a>
+        - <strong>Club:</strong> {{ report.club.name }} 
+        - {% if report.is_authorized %}
+          <span class="status-approved">Approved on {{ report.approval_date }}</span>
+        {% elif report.is_declined %}
+          <span class="status-declined">Declined on {{ report.decline_date }}</span>
+        {% else %}
+          <span class="status-pending">Pending</span>
+        {% endif %}
+      </li>
     {% endfor %}
   </ul>
+
+  {% if not rotary_year.is_closed or user.is_superuser %}
+    <h2>Upload Club Report</h2>
+    <ul>
+      {% for club in clubs %}
+        <li>
+          <a href="{% url 'upload-club-report' rotary_year.id club.id %}">Upload Report for {{ club.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
   <h2>Budgets</h2>
   <ul>
@@ -27,5 +57,7 @@
     {% endfor %}
   </ul>
 
-  <a href="{% url 'rotaryyear-update' object.pk %}" class="button">Edit Rotary Year</a>
+  {% if user.is_superuser %}
+    <a href="{% url 'rotaryyear-update' rotary_year.id %}" class="button">Edit Rotary Year</a>
+  {% endif %}
 {% endblock %}

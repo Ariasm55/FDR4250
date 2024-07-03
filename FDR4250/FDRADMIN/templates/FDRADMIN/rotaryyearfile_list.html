@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Files for {{ rotary_year.year }}</h1>
+  <ul>
+    {% for file in files %}
+      <li>{{ file.file.name }}</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'rotaryyearfile-upload' rotary_year.id %}" class="button">Upload New File</a>
+{% endblock %}

@@ -3,9 +3,8 @@
 {% block content %}
   <h1>Rotary Years</h1>
   <ul>
-    {% for rotaryyear in object_list %}
-      <li><a href="{% url 'rotaryyear-detail' rotaryyear.pk %}">{{ rotaryyear.year }}</a></li>
+    {% for year in rotary_years %}
+      <li><a href="{% url 'rotaryyear-detail' year.id %}">{{ year.year }}</a></li>
     {% endfor %}
   </ul>
-  <a href="{% url 'rotaryyear-create' %}" class="button">Create New Rotary Year</a>
 {% endblock %}

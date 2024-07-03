@@ -34,6 +34,28 @@ SECRET_KEY = 'django-insecure-d668c$0s4-78lq!0c24%-(-p&uw6n&ti9jco^df_hhq2!60v7c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+#LOGGING = {
+#    'version': 1,
+#    'disable_existing_loggers': False,
+##    'handlers': {
+#        'console': {
+#            'level': 'DEBUG',
+#            'class': 'logging.StreamHandler',
+#        },
+#    },
+#    'loggers': {
+#        'django': {
+#            'handlers': ['console'],
+#            'level': 'DEBUG',
+#        },
+#        'FDRADMIN': {
+#            'handlers': ['console'],
+#            'level': 'DEBUG',
+#            'propagate': True,
+#        },
+#    },
+#}
+
 ALLOWED_HOSTS = ["*"]
 
 
@@ -57,7 +79,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'FDRADMIN.middleware.PDFViewMiddleware',
 ]
+
+X_FRAME_OPTIONS = 'DENY'  # Set globally
 
 ROOT_URLCONF = 'FDR4250.urls'
 

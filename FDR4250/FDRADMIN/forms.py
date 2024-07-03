@@ -25,7 +25,7 @@ class RotaryYearFileForm(forms.ModelForm):
 class ClubReportForm(forms.ModelForm):
     class Meta:
         model = ClubReport
-        fields = ['report_file']
+        fields = ['file']
 
 class ClubForm(forms.ModelForm):
     class Meta:

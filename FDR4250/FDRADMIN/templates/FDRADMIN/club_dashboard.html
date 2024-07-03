@@ -1,21 +1,58 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Club Dashboard - {{ club.name }}</h1>
+  <h1>{{ club.name }} Dashboard</h1>
+
+  <h2>Uploaded Reports</h2>
+  <ul>
+    {% for report in reports %}
+      <li>
+        <a href="{% url 'file-view' report.id %}">{{ report.file.name }}</a> 
+        - {% if report.is_authorized %}
+          <span class="status-approved">Approved on {{ report.approval_date }}</span>
+        {% elif report.is_declined %}
+          <span class="status-declined">Declined on {{ report.decline_date }}</span>
+        {% else %}
+          <span class="status-pending">Pending</span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Files Published by Superadmin</h2>
+  <ul>
+    {% for file in superadmin_files %}
+      <li>
+        <a href="{% url 'file-download' file.id %}">{{ file.file.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+
   <h2>Active Rotary Years</h2>
   <ul>
     {% for year in active_years %}
-      <li>{{ year.year }}: {{ year.notice }}</li>
+      <li>{{ year.year }}</li>
     {% endfor %}
   </ul>
 
   <h2>Past Rotary Years</h2>
   <ul>
     {% for year in past_years %}
-      <li>{{ year.year }}: {{ year.notice }} (Closed)</li>
+      <li>{{ year.year }}</li>
     {% endfor %}
   </ul>
 
-  <h2>Budget</h2>
-  <p>Your current budget is: ${{ club.budget }}</p>
+  <h2>Budgets</h2>
+  <ul>
+    {% for budget in budgets %}
+      <li>{{ budget.club.name }} - ${{ budget.amount }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Upload New Club Report</h2>
+  <form method="post" enctype="multipart/form-data" action="{% url 'upload-club-report' active_years.0.id club.id %}">
+    {% csrf_token %}
+    <input type="file" name="file">
+    <button type="submit" class="button">Upload</button>
+  </form>
 {% endblock %}
