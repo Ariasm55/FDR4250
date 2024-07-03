@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{{ object.year }}</h1>
+  <p>Full Year: {{ object.rotary_full_year }}</p>
+  <p>Notice: {{ object.notice }}</p>
+  <p>Closed: {{ object.is_closed }}</p>
+
+  <h2>Files</h2>
+  <ul>
+    {% for file in files %}
+      <li>{{ file.file.name }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Reports</h2>
+  <ul>
+    {% for report in reports %}
+      <li>{{ report.report_file.name }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Budgets</h2>
+  <ul>
+    {% for budget in budgets %}
+      <li>{{ budget.club.name }} - ${{ budget.amount }}</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'rotaryyear-update' object.pk %}" class="button">Edit Rotary Year</a>
+{% endblock %}

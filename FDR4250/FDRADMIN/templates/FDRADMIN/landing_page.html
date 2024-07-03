@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to FDRADMIN</title>
+    <link rel="stylesheet" href="{% static 'FDRADMIN/styles.css' %}">
+</head>
+<body>
+    <header>
+        <img src="{% static 'FDRADMIN/rotary_logo.png' %}" alt="Rotary Logo">
+        <h1>Welcome to FDRADMIN</h1>
+    </header>
+    <main>
+        <section>
+            <h2>About Us</h2>
+            <p>FDRADMIN is a comprehensive management system designed to help you manage your clubs, countries, districts, and rotary years efficiently.</p>
+        </section>
+        <section>
+            <h2>Features</h2>
+            <ul>
+                <li>Manage Clubs</li>
+                <li>Manage Countries</li>
+                <li>Manage Districts</li>
+                <li>Manage Rotary Years</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Get Started</h2>
+            <p><a href="{% url 'club-list' %}" class="button">View Clubs</a></p>
+            <p><a href="{% url 'country-list' %}" class="button">View Countries</a></p>
+            <p><a href="{% url 'district-list' %}" class="button">View Districts</a></p>
+            <p><a href="{% url 'rotaryyear-list' %}" class="button">View Rotary Years</a></p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 FDRADMIN. All rights reserved.</p>
+    </footer>
+</body>
+</html>

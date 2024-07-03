@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{{ object.club.name }} - {{ object.rotary_year.year }}</h1>
+  <p>Amount: ${{ object.amount }}</p>
+  <p>Description: {{ object.description }}</p>
+  <p>Allocated at: {{ object.allocated_at }}</p>
+  <a href="{% url 'clubbudget-update' object.pk %}" class="button">Edit Budget</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Districts</h1>
+  <ul>
+    {% for district in object_list %}
+      <li><a href="{% url 'district-detail' district.pk %}">{{ district.district_name }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'district-create' %}">Create a new district</a>
+{% endblock %}

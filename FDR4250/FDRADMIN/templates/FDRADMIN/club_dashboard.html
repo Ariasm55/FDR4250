@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Club Dashboard - {{ club.name }}</h1>
+  <h2>Active Rotary Years</h2>
+  <ul>
+    {% for year in active_years %}
+      <li>{{ year.year }}: {{ year.notice }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Past Rotary Years</h2>
+  <ul>
+    {% for year in past_years %}
+      <li>{{ year.year }}: {{ year.notice }} (Closed)</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Budget</h2>
+  <p>Your current budget is: ${{ club.budget }}</p>
+{% endblock %}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FDRADMIN Project</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'FDRADMIN/styles.css' %}">
+</head>
+<body>
+    <header>
+        <img src="{% static 'FDRADMIN/rotary_logo.png' %}" alt="Rotary Logo">
+        <h1>FDRADMIN Project</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'club-list' %}">Clubs</a></li>
+                <li><a href="{% url 'country-list' %}">Countries</a></li>
+                <li><a href="{% url 'district-list' %}">Districts</a></li>
+                <li><a href="{% url 'rotaryyear-list' %}">Rotary Years</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

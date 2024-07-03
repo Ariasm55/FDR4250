@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Club Budgets</h1>
+  <ul>
+    {% for budget in object_list %}
+      <li><a href="{% url 'clubbudget-detail' budget.pk %}">{{ budget.club.name }} - {{ budget.rotary_year.year }} - ${{ budget.amount }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'clubbudget-create' %}" class="button">Create New Budget</a>
+{% endblock %}

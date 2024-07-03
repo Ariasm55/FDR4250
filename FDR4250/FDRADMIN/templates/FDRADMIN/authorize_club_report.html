@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Authorize Report for {{ club_report.club.name }} ({{ club_report.rotary_year.year }})</h1>
+  <p>Uploaded at: {{ club_report.uploaded_at }}</p>
+  <p>File: <a href="{{ club_report.report_file.url }}">{{ club_report.report_file.name }}</a></p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Authorize</button>
+  </form>
+{% endblock %}

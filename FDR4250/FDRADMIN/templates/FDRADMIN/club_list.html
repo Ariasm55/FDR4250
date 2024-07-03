@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Clubs</h1>
+  <ul>
+    {% for club in object_list %}
+      <li><a href="{% url 'club-detail' club.pk %}">{{ club.name }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'club-create' %}">Create a new club</a>
+{% endblock %}

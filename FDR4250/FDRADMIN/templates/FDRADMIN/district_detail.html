@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{{ object.district_name }}</h1>
+  <p>Zone: {{ object.zone }}</p>
+
+  <h2>Countries</h2>
+  <ul>
+    {% for country in countries %}
+      <li>{{ country.name }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Clubs</h2>
+  <ul>
+    {% for club in clubs %}
+      <li><a href="{% url 'club-detail' club.pk %}">{{ club.name }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'district-update' object.pk %}" class="button">Edit District</a>
+{% endblock %}

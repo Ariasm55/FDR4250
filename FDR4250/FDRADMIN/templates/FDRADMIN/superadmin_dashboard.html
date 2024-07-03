@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>SuperAdmin Dashboard</h1>
+
+  <h2>Clubs</h2>
+  <ul>
+    {% for club in clubs %}
+      <li><a href="{% url 'club-detail' club.pk %}">{{ club.name }}</a></li>
+    {% endfor %}
+  </ul>
+
+  <h2>Rotary Years</h2>
+  <ul>
+    {% for rotary_year in rotary_years %}
+      <li>{{ rotary_year.year }} - {{ rotary_year.rotary_full_year }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

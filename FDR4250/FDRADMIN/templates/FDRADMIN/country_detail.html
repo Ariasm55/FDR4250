@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{{ object.name }}</h1>
+  
+  <h2>Clubs</h2>
+  <ul>
+    {% for club in clubs %}
+      <li><a href="{% url 'club-detail' club.pk %}">{{ club.name }}</a></li>
+    {% endfor %}
+  </ul>
+  
+  <a href="{% url 'country-update' object.pk %}" class="button">Edit Country</a>
+{% endblock %}

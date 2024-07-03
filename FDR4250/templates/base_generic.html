@@ -1,0 +1,24 @@
+<!-- templates/base_generic.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FDR450 Project</title>
+</head>
+<body>
+    <header>
+        <h1>FDR450 Project</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'club-list' %}">Clubs</a></li>
+                <li><a href="{% url 'country-list' %}">Countries</a></li>
+                <li><a href="{% url 'district-list' %}">Districts</a></li>
+                <li><a href="{% url 'rotaryyear-list' %}">Rotary Years</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{% if object %}Update{% else %}Create{% endif %} Club</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#id_district').change(function() {
+        var districtId = $(this).val();
+        $.ajax({
+          url: '{% url "get-countries-for-district" 0 %}'.replace('0', districtId),
+          success: function(data) {
+            var countrySelect = $('#id_country');
+            countrySelect.empty();
+            $.each(data, function(index, country) {
+              countrySelect.append(new Option(country.name, country.id));
+            });
+          }
+        });
+      });
+    });
+  </script>
+{% endblock %}
